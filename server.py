@@ -1,10 +1,13 @@
 from flask import Flask, jsonify, request
 from joblib import load
 import numpy as np
+import pandas as pd
+
+from helper.disease import getDescription, getPrecautions
 
 app = Flask(__name__)
 
-model = load('./model/decision_tree.joblib')
+model = load('./model/gaussian_naive_bayes.joblib')
 
 symptomDict = {'itching': 0,
                'skin_rash': 1,
@@ -157,9 +160,10 @@ def predict():
             indices.append(symptomDict[symptom])
 
         inputVector[indices] = 1
-        prediction = model.predict([inputVector])[0]
+        prediction = model.predict([inputVector])[0].strip()
+        print(prediction)
 
-        return jsonify({"disease": prediction})
+        return jsonify({"disease": prediction, "description": getDescription(prediction), "precautions": getPrecautions(prediction)})
 
 
 if __name__ == "__main__":
