@@ -1,42 +1,42 @@
 ,Training,Testing
-(vertigo) Paroymsal  Positional Vertigo,88,32
-AIDS,89,31
-Acne,82,38
-Alcoholic hepatitis,86,34
-Allergy,87,33
-Arthritis,84,36
-Bronchial Asthma,81,39
-Cervical spondylosis,79,41
-Chicken pox,87,33
-Chronic cholestasis,85,35
-Common Cold,78,42
-Dengue,93,27
-Diabetes ,87,33
-Dimorphic hemmorhoids(piles),80,40
-Drug Reaction,80,40
-Fungal infection,89,31
-GERD,78,42
-Gastroenteritis,84,36
-Heart attack,71,49
-Hepatitis B,89,31
-Hepatitis C,88,32
-Hepatitis D,79,41
-Hepatitis E,83,37
-Hypertension ,85,35
-Hyperthyroidism,86,34
-Hypoglycemia,99,21
-Hypothyroidism,87,33
-Impetigo,81,39
-Jaundice,84,36
-Malaria,89,31
-Migraine,78,42
-Osteoarthristis,83,37
-Paralysis (brain hemorrhage),79,41
-Peptic ulcer diseae,82,38
-Pneumonia,86,34
-Psoriasis,89,31
-Tuberculosis,83,37
-Typhoid,78,42
-Urinary tract infection,84,36
-Varicose veins,82,38
-hepatitis A,82,38
+(vertigo) Paroymsal  Positional Vertigo,102,18
+AIDS,98,22
+Acne,89,31
+Alcoholic hepatitis,96,24
+Allergy,97,23
+Arthritis,97,23
+Bronchial Asthma,92,28
+Cervical spondylosis,93,27
+Chicken pox,99,21
+Chronic cholestasis,99,21
+Common Cold,86,34
+Dengue,102,18
+Diabetes ,98,22
+Dimorphic hemmorhoids(piles),93,27
+Drug Reaction,93,27
+Fungal infection,96,24
+GERD,93,27
+Gastroenteritis,94,26
+Heart attack,88,32
+Hepatitis B,101,19
+Hepatitis C,103,17
+Hepatitis D,92,28
+Hepatitis E,98,22
+Hypertension ,100,20
+Hyperthyroidism,97,23
+Hypoglycemia,107,13
+Hypothyroidism,97,23
+Impetigo,95,25
+Jaundice,94,26
+Malaria,95,25
+Migraine,91,29
+Osteoarthristis,97,23
+Paralysis (brain hemorrhage),90,30
+Peptic ulcer diseae,96,24
+Pneumonia,97,23
+Psoriasis,102,18
+Tuberculosis,96,24
+Typhoid,95,25
+Urinary tract infection,100,20
+Varicose veins,92,28
+hepatitis A,96,24
