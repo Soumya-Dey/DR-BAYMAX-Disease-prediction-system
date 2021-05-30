@@ -1,7 +1,6 @@
 from flask import Flask, jsonify, request
 from joblib import load
 import numpy as np
-import pandas as pd
 
 from helper.disease import getDescription, getPrecautions
 
@@ -163,7 +162,11 @@ def predict():
         prediction = model.predict([inputVector])[0].strip()
         print(prediction)
 
-        return jsonify({"disease": prediction, "description": getDescription(prediction), "precautions": getPrecautions(prediction)})
+        return jsonify({
+            "disease": prediction,
+            "description": getDescription(prediction),
+            "precautions": getPrecautions(prediction)
+        })
 
 
 if __name__ == "__main__":
