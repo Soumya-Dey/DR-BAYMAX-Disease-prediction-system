@@ -6,7 +6,7 @@ from helper.disease import getDescription, getPrecautions
 
 app = Flask(__name__)
 
-model = load('./model/gaussian_naive_bayes.joblib')
+model = load('./model/gaussian_naive_bayes_with_weights.joblib')
 
 symptomDict = {'itching': 0,
                'skin_rash': 1,
