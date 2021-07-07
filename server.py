@@ -1,10 +1,13 @@
 from flask import Flask, jsonify, request
 from joblib import load
 import numpy as np
+import mongoengine as db
 
 from helper.disease import getDescription, getPrecautions
 
 app = Flask(__name__)
+DB_URI = 'mongodb+srv://admin:mongoadmin12345@cluster0.j1yqw.mongodb.net/drBaymax?retryWrites=true&w=majority'
+db.connect(host=DB_URI)
 
 model = load('./model/gaussian_naive_bayes_with_weights.joblib')
 
