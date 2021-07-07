@@ -1,13 +1,16 @@
+from helper.disease import getDescription, getPrecautions
+from classes import User, Prediction
+from env import JWT_SECRET, MONGO_URI
 from flask import Flask, jsonify, request
+from flask_bcrypt import Bcrypt
 from joblib import load
 import numpy as np
 import mongoengine as db
-
-from helper.disease import getDescription, getPrecautions
+import jwt
 
 app = Flask(__name__)
-# DB_URI = 'mongodb+srv://admin:mongoadmin12345@cluster0.j1yqw.mongodb.net/drBaymax?retryWrites=true&w=majority'
-# db.connect(host=DB_URI)
+bcrypt = Bcrypt(app)
+db.connect(host=MONGO_URI)
 
 model = load('./model/gaussian_naive_bayes_with_weights.joblib')
 
@@ -145,6 +148,12 @@ symptomDict = {'itching': 0,
                'loss_of_smell': 131}
 
 
+@app.errorhandler(Exception)
+def server_error(err):
+    print(err)
+    return jsonify({"errors": [{"msg": "Server error occured. Please try again!"}]}), 500
+
+
 @app.route("/")
 def root():
     return jsonify(msg='Server running on => http://localhost:5000')
@@ -153,8 +162,8 @@ def root():
 @app.route("/predict", methods=['POST'])
 def predict():
     if request.method == 'POST':
-        data = request.get_json()
-        symptoms = np.array(data['symptoms'])
+        body = request.get_json()
+        symptoms = np.array(body['symptoms'])
 
         inputVector = np.zeros(len(symptomDict))
         indices = []
@@ -170,6 +179,85 @@ def predict():
             "description": getDescription(prediction),
             "precautions": getPrecautions(prediction)
         })
+
+
+@app.route("/register", methods=['POST'])
+def register():
+    if request.method == 'POST':
+        body = request.get_json()
+
+        errors = []
+        if 'email' not in body:
+            errors.append({"msg": "Email is required!"})
+        if 'password' not in body:
+            errors.append({"msg": "Password is required!"})
+        if 'password' in body and len(body['password']) < 6:
+            errors.append({"msg": "Password must be 6 or more characters!"})
+        if len(errors) > 0:
+            return jsonify({"errors": errors}), 400
+
+        existingUser = User.objects(email=body['email']).first()
+        if existingUser is not None:
+            return jsonify({"errors": [{"msg": "Email address already exists!"}]}), 400
+
+        user = User(
+            email=body['email'],
+            password=bcrypt.generate_password_hash(
+                body['password']).decode('utf-8'),
+            name=body['name']
+        )
+        user.save()
+
+        jwtToken = jwt.encode({"email": user.email},
+                              JWT_SECRET, algorithm="HS256")
+
+        return {'token': jwtToken}
+
+
+@app.route("/login", methods=['POST'])
+def login():
+    if request.method == 'POST':
+        body = request.get_json()
+
+        errors = []
+        if 'email' not in body:
+            errors.append({"msg": "Email is required!"})
+        if 'password' not in body:
+            errors.append({"msg": "Password is required!"})
+        if len(errors) > 0:
+            return jsonify({"errors": errors}), 400
+
+        existingUser = User.objects(email=body['email']).first()
+        if existingUser is None:
+            return jsonify({"errors": [{"msg": "Email or Password incorrect!"}]}), 400
+
+        if bcrypt.check_password_hash(existingUser.password, body['password']):
+            jwtToken = jwt.encode({"email": existingUser.email},
+                                  JWT_SECRET, algorithm="HS256")
+
+            return {'token': jwtToken}
+        else:
+            return jsonify({errors: [{"msg": "Email or Password incorrect!"}]}), 400
+
+
+@app.route('/auth', methods=['GET', 'POST'])
+def auth():
+    if 'auth-token' not in request.headers:
+        return jsonify({"errors": [{'msg': "Auth token missing. Access unauthorized!"}]}), 500
+
+    try:
+        payload = jwt.decode(
+            request.headers['auth-token'], JWT_SECRET, algorithms=["HS256"])
+    except jwt.DecodeError:
+        return jsonify({"errors": [{"msg": "Invalid auth token!"}]}), 500
+    if 'email' not in payload:
+        return jsonify({"errors": [{'msg': "Invalid auth token!"}]}), 500
+
+    user = User.objects(email=payload['email']).first()
+    if user is None:
+        return jsonify({"errors": [{'msg': "User not found!"}]}), 400
+
+    return jsonify(user.toJson())
 
 
 if __name__ == "__main__":
