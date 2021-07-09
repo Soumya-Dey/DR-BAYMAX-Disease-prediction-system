@@ -6,24 +6,26 @@ import './App.css';
 import Navbar from './components/layouts/Navbar';
 import Landing from './components/layouts/Landing';
 import Alert from './components/layouts/Alert';
+import Register from './components/auth/Register';
+import Login from './components/auth/Login';
 import NotFound from './components/layouts/NotFound';
 import PrivateRoute from './components/routes/PrivateRoute';
 import store from './store';
-import { setAlert } from './actions/alert';
-// import setAuthToken from './utils/setAuthToken';
+import { loadUser } from './actions/auth';
+import setAuthToken from './utils/setAuthToken';
 
-// if (localStorage.token) setAuthToken(localStorage.token);
+if (localStorage.token) setAuthToken(localStorage.token);
 
 const App = () => {
   useEffect(() => {
-    // store.dispatch(loadUser());
+    store.dispatch(loadUser());
   }, []);
 
   return (
     <Provider store={store}>
       <Router>
         <Fragment>
-          <Navbar />
+          {/* <Navbar /> */}
 
           <Switch>
             <Route exact path='/' component={Landing} />
@@ -31,7 +33,8 @@ const App = () => {
             <section className='container'>
               <Alert />
               <Switch>
-                <PrivateRoute exact path='/dashboard' />
+                <Route exact path='/register' component={Register} />
+                <Route exact path='/login' component={Login} />
                 <Route component={NotFound} />
               </Switch>
             </section>

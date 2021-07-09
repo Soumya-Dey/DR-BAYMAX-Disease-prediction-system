@@ -148,10 +148,10 @@ symptomDict = {'itching': 0,
                'loss_of_smell': 131}
 
 
-@app.errorhandler(Exception)
-def server_error(err):
-    print(err)
-    return jsonify({"errors": [{"msg": "Server error occured. Please try again!"}]}), 500
+# @app.errorhandler(Exception)
+# def server_error(err):
+#     print(err)
+#     return jsonify({"errors": [{"msg": "Server error occured. Please try again!"}]}), 500
 
 
 @app.route("/")
@@ -237,7 +237,7 @@ def login():
 
             return {'token': jwtToken}
         else:
-            return jsonify({errors: [{"msg": "Email or Password incorrect!"}]}), 400
+            return jsonify({"errors": [{"msg": "Email or Password incorrect!"}]}), 400
 
 
 @app.route('/auth', methods=['GET', 'POST'])

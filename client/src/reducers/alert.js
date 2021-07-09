@@ -1,8 +1,6 @@
 import { SET_ALERT, REMOVE_ALERT } from '../actions/types';
 
-const initialState = [
-  { id: '48958855', alertType: 'danger', msg: 'Aleret message here!' },
-];
+const initialState = [];
 
 export default function (state = initialState, action) {
   switch (action.type) {
