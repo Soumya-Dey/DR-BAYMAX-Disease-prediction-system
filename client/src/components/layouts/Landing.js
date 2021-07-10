@@ -7,7 +7,7 @@ import icon from './icon-rounded.svg';
 
 const Landing = (props) => {
   if (props.isAuthenticated) {
-    return <Redirect to='/fdd' />;
+    return <Redirect to='/dashboard' />;
   }
 
   return (
@@ -23,12 +23,12 @@ const Landing = (props) => {
           }}
           alt='Dr. Baymax Icon'
         />
-        <h1 className='large text-light mt-4'>👋 Hi</h1>
+        <h1 className='large text-light mt-4 hi-text'>👋 Hi</h1>
         <h1 className='x-large text-light'>I'm Dr. Baymax.</h1>
         <p className='lead text-light'>
           Your friendly virtual doctor. How are you feeling today?
         </p>
-        <div className='buttons'>
+        <div className='buttons mt-2'>
           <Link to='/register' className='btn btn-accent btn-large mr'>
             Get Started
           </Link>
