@@ -1,5 +1,3 @@
-from helper.disease import getDescription, getPrecautions
-from classes import User, Prediction
 from env import JWT_SECRET, MONGO_URI
 from flask import Flask, jsonify, request
 from flask_bcrypt import Bcrypt
@@ -7,6 +5,9 @@ from joblib import load
 import numpy as np
 import mongoengine as db
 import jwt
+
+from helper.disease import getDescription, getPrecautions
+from classes import User, Prediction
 
 app = Flask(__name__)
 bcrypt = Bcrypt(app)
@@ -147,21 +148,36 @@ symptomDict = {'itching': 0,
                'blood_in_sputum': 130,
                'loss_of_smell': 131}
 
+# default error handler
+@app.errorhandler(Exception)
+def server_error(err):
+    print(err)
+    return jsonify({"errors": [{"msg": "Server error occured. Please try again!"}]}), 500
 
-# @app.errorhandler(Exception)
-# def server_error(err):
-#     print(err)
-#     return jsonify({"errors": [{"msg": "Server error occured. Please try again!"}]}), 500
-
-
+# route rote
 @app.route("/")
 def root():
     return jsonify(msg='Server running on => http://localhost:5000')
 
-
+# route to make a prediction
 @app.route("/predict", methods=['POST'])
 def predict():
     if request.method == 'POST':
+        if 'auth-token' not in request.headers:
+            return jsonify({"errors": [{'msg': "Auth token missing. Access unauthorized!"}]}), 500
+
+        try:
+            payload = jwt.decode(
+                request.headers['auth-token'], JWT_SECRET, algorithms=["HS256"])
+        except jwt.DecodeError:
+            return jsonify({"errors": [{"msg": "Invalid auth token!"}]}), 500
+        if 'email' not in payload:
+            return jsonify({"errors": [{'msg': "Invalid auth token!"}]}), 500
+
+        user = User.objects(email=payload['email']).first()
+        if user is None:
+            return jsonify({"errors": [{'msg': "User not found!"}]}), 400
+
         body = request.get_json()
         symptoms = np.array(body['symptoms'])
 
@@ -174,13 +190,44 @@ def predict():
         prediction = model.predict([inputVector])[0].strip()
         print(prediction)
 
+        newPrediction = Prediction(
+            user=user,
+            symptoms=body['symptoms'],
+            disease=prediction
+        )
+        newPrediction.save()
+
         return jsonify({
-            "disease": prediction,
+            "prediction": newPrediction.toJson(),
             "description": getDescription(prediction),
             "precautions": getPrecautions(prediction)
         })
 
+# route to get all previous reports of an user
+@app.route('/report', methods=['GET'])
+def report():
+    if request.method == 'GET':
+        if 'auth-token' not in request.headers:
+            return jsonify({"errors": [{'msg': "Auth token missing. Access unauthorized!"}]}), 500
 
+        try:
+            payload = jwt.decode(
+                request.headers['auth-token'], JWT_SECRET, algorithms=["HS256"])
+        except jwt.DecodeError:
+            return jsonify({"errors": [{"msg": "Invalid auth token!"}]}), 500
+        if 'email' not in payload:
+            return jsonify({"errors": [{'msg': "Invalid auth token!"}]}), 500
+
+        user = User.objects(email=payload['email']).first()
+        if user is None:
+            return jsonify({"errors": [{'msg': "User not found!"}]}), 400
+
+        predictions = Prediction.objects(user=user)
+        reports = [pred.toJson() for pred in predictions]
+
+        return jsonify({"count": len(reports), "reports": reports})
+
+# route to sign up
 @app.route("/register", methods=['POST'])
 def register():
     if request.method == 'POST':
@@ -213,7 +260,7 @@ def register():
 
         return {'token': jwtToken}
 
-
+# route to login
 @app.route("/login", methods=['POST'])
 def login():
     if request.method == 'POST':
@@ -239,7 +286,7 @@ def login():
         else:
             return jsonify({"errors": [{"msg": "Email or Password incorrect!"}]}), 400
 
-
+# route to get currently logged in user
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
     if 'auth-token' not in request.headers:

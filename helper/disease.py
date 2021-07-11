@@ -23,4 +23,4 @@ def getDescription(disease):
 
 
 def getPrecautions(disease):
-    return ','.join(precautionDict[disease.strip()])
+    return precautionDict[disease.strip()].tolist()

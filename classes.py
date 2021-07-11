@@ -36,7 +36,7 @@ class Prediction(db.Document):
 
     def toJson(self):
         predictionDict = {
-            "user": self.user,
+            "user": self.user.toJson(),
             "symptoms": self.symptoms,
             "disease": self.disease,
             "created": str(self.created),
