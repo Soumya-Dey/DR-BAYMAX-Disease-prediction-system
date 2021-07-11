@@ -29,7 +29,10 @@ const Landing = (props) => {
           Your friendly virtual doctor. How are you feeling today?
         </p>
         <div className='buttons mt-2'>
-          <Link to='/register' className='btn btn-accent btn-large mr'>
+          <Link
+            to='/register'
+            className='btn btn-accent btn-large text-light mr'
+          >
             Get Started
           </Link>
           <Link to='/login' className='btn btn-light btn-large'>

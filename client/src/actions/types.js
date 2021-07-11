@@ -12,3 +12,8 @@ export const LOGIN_FAILURE = 'LOGIN_FAILURE';
 export const USER_LOADED = 'USER_LOADED';
 export const AUTH_ERROR = 'AUTH_ERROR';
 export const LOGOUT = 'LOGOUT';
+
+// prediction types
+export const GET_PREDICTION = 'GET_PREDICTION';
+export const GET_ALL_PREDICTION = 'GET_ALL_PREDICTIONS';
+export const PREDICTION_ERROR = 'GET_PREDICTION';
