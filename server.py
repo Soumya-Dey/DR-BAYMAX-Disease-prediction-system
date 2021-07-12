@@ -149,17 +149,23 @@ symptomDict = {'itching': 0,
                'loss_of_smell': 131}
 
 # default error handler
+
+
 @app.errorhandler(Exception)
 def server_error(err):
     print(err)
     return jsonify({"errors": [{"msg": "Server error occured. Please try again!"}]}), 500
 
 # route rote
+
+
 @app.route("/")
 def root():
     return jsonify(msg='Server running on => http://localhost:5000')
 
 # route to make a prediction
+
+
 @app.route("/predict", methods=['POST'])
 def predict():
     if request.method == 'POST':
@@ -205,6 +211,8 @@ def predict():
         })
 
 # route to get all previous reports of an user
+
+
 @app.route('/report', methods=['GET'])
 def report():
     if request.method == 'GET':
@@ -229,6 +237,8 @@ def report():
         return jsonify({"count": len(reports), "reports": reports})
 
 # route to sign up
+
+
 @app.route("/register", methods=['POST'])
 def register():
     if request.method == 'POST':
@@ -262,6 +272,8 @@ def register():
         return {'token': jwtToken}
 
 # route to login
+
+
 @app.route("/login", methods=['POST'])
 def login():
     if request.method == 'POST':
@@ -288,6 +300,8 @@ def login():
             return jsonify({"errors": [{"msg": "Email or Password incorrect!"}]}), 400
 
 # route to get currently logged in user
+
+
 @app.route('/auth', methods=['GET', 'POST'])
 def auth():
     if 'auth-token' not in request.headers:
