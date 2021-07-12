@@ -13,7 +13,7 @@ app = Flask(__name__)
 bcrypt = Bcrypt(app)
 db.connect(host=MONGO_URI)
 
-model = load('./model/gaussian_naive_bayes_with_weights.joblib')
+model = load('./model/mlp-classifier.joblib')
 
 symptomDict = {'itching': 0,
                'skin_rash': 1,
@@ -188,12 +188,13 @@ def predict():
 
         inputVector[indices] = 1
         prediction = model.predict([inputVector])[0].strip()
-        print(prediction)
+        probability = model.predict_proba([inputVector])[0].max()
 
         newPrediction = Prediction(
             user=user,
             symptoms=body['symptoms'],
-            disease=prediction
+            disease=prediction,
+            probability=probability
         )
         newPrediction.save()
 
