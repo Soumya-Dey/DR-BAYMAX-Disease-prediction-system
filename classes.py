@@ -28,6 +28,7 @@ class Prediction(db.Document):
     user = db.ReferenceField(User)
     symptoms = db.ListField(db.StringField())
     disease = db.StringField()
+    probability = db.FloatField()
     created = db.DateTimeField(default=datetime.utcnow)
     meta = {
         "indexes": ["user", "disease"],
@@ -39,6 +40,7 @@ class Prediction(db.Document):
             "user": self.user.toJson(),
             "symptoms": self.symptoms,
             "disease": self.disease,
+            "probability": self.probability,
             "created": str(self.created),
         }
 
