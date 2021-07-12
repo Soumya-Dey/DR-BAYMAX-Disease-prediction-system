@@ -15,5 +15,5 @@ export const LOGOUT = 'LOGOUT';
 
 // prediction types
 export const GET_PREDICTION = 'GET_PREDICTION';
-export const GET_ALL_PREDICTION = 'GET_ALL_PREDICTIONS';
+export const GET_ALL_PREDICTIONS = 'GET_ALL_PREDICTIONS';
 export const PREDICTION_ERROR = 'GET_PREDICTION';

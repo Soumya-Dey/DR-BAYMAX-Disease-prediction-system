@@ -8,6 +8,7 @@ import Alert from './components/layouts/Alert';
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Dashboard from './components/dashboard/Dashboard';
+import Report from './components/report/Report';
 import NotFound from './components/layouts/NotFound';
 import PrivateRoute from './components/routes/PrivateRoute';
 import store from './store';
@@ -38,6 +39,7 @@ const App = () => {
 
                 <section className='div-conatiner '>
                   <PrivateRoute exact path='/dashboard' component={Dashboard} />
+                  <PrivateRoute exact path='/report' component={Report} />
                 </section>
                 <Route component={NotFound} />
               </Switch>
