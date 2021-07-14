@@ -1,0 +1,47 @@
+Disease,                                       precision,    recall,  f1-score,   support
+
+(vertigo) Paroymsal  Positional Vertigo,       1.00,      1.00,      1.00,        32
+                                   AIDS,       1.00,      1.00,      1.00,        31
+                                   Acne,       0.97,      0.97,      0.97,        38
+                    Alcoholic hepatitis,       1.00,      1.00,      1.00,        34
+                                Allergy,       1.00,      0.94,      0.97,        35
+                              Arthritis,       0.89,      0.94,      0.91,        34
+                       Bronchial Asthma,       1.00,      1.00,      1.00,        39
+                   Cervical spondylosis,       1.00,      1.00,      1.00,        41
+                            Chicken pox,       1.00,      1.00,      1.00,        33
+                    Chronic cholestasis,       1.00,      1.00,      1.00,        35
+                            Common Cold,       1.00,      1.00,      1.00,        42
+                                 Dengue,       1.00,      0.90,      0.95,        30
+                              Diabetes ,       1.00,      1.00,      1.00,        33
+           Dimorphic hemmorhoids(piles),       1.00,      1.00,      1.00,        40
+                          Drug Reaction,       1.00,      1.00,      1.00,        40
+                       Fungal infection,       0.90,      0.97,      0.93,        29
+                                   GERD,       0.98,      1.00,      0.99,        41
+                        Gastroenteritis,       1.00,      1.00,      1.00,        36
+                           Heart attack,       1.00,      0.98,      0.99,        50
+                            Hepatitis B,       1.00,      0.97,      0.98,        32
+                            Hepatitis C,       1.00,      0.97,      0.98,        33
+                            Hepatitis D,       0.98,      1.00,      0.99,        40
+                            Hepatitis E,       1.00,      1.00,      1.00,        37
+                          Hypertension ,       0.97,      0.97,      0.97,        35
+                        Hyperthyroidism,       1.00,      1.00,      1.00,        34
+                           Hypoglycemia,       1.00,      1.00,      1.00,        21
+                         Hypothyroidism,       1.00,      1.00,      1.00,        33
+                               Impetigo,       1.00,      1.00,      1.00,        39
+                               Jaundice,       0.94,      1.00,      0.97,        34
+                                Malaria,       0.97,      0.97,      0.97,        31
+                               Migraine,       0.98,      0.98,      0.98,        42
+                        Osteoarthristis,       0.95,      0.90,      0.92,        39
+           Paralysis (brain hemorrhage),       1.00,      1.00,      1.00,        41
+                    Peptic ulcer diseae,       0.97,      1.00,      0.99,        37
+                              Pneumonia,       1.00,      1.00,      1.00,        34
+                              Psoriasis,       1.00,      1.00,      1.00,        31
+                           Tuberculosis,       1.00,      1.00,      1.00,        37
+                                Typhoid,       1.00,      1.00,      1.00,        42
+                Urinary tract infection,       1.00,      1.00,      1.00,        36
+                         Varicose veins,       1.00,      1.00,      1.00,        38
+                            hepatitis A,       0.97,      1.00,      0.99,        37
+
+                               accuracy,                           0.99,      1476
+                              macro avg,       0.99,      0.99,      0.99,      1476
+                           weighted avg,       0.99,      0.99,      0.99,      1476
