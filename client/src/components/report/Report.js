@@ -3,38 +3,51 @@ import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import DashboardTopBar from '../dashboard/DashboardTopBar';
-import { getAllPredictions } from '../../actions/prediction';
+import Spinner from '../layouts/Spinner';
+import ReportItem from './ReportItem';
+import { getAllPredictions, clearPrediction } from '../../actions/prediction';
 
 const Report = ({
+  clearPrediction,
   getAllPredictions,
-  auth,
   prediction: { loading, predictions },
 }) => {
   useEffect(() => {
+    clearPrediction();
     getAllPredictions();
-  }, [getAllPredictions]);
+  }, [clearPrediction, getAllPredictions]);
 
   return (
-    <Fragment>
-      <DashboardTopBar user={auth.user} />
-      <Link to='/dashboard' className='btn btn-light mb-2'>
-        Go Back
-      </Link>
-      reports
-    </Fragment>
+    <div className='dashboard'>
+      {loading || predictions === null ? (
+        <Spinner />
+      ) : predictions.count > 0 ? (
+        <Fragment>
+          <Link to='/dashboard' className='btn btn-light mb-2'>
+            Go Back
+          </Link>
+          <div>
+            {predictions.reports.map((report, i) => (
+              <ReportItem report={report} key={i} />
+            ))}
+          </div>
+        </Fragment>
+      ) : (
+        'No Previous Report found...'
+      )}
+    </div>
   );
 };
 
 Report.propTypes = {
   getAllPredictions: PropTypes.func.isRequired,
-  auth: PropTypes.object.isRequired,
   prediction: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
   prediction: state.prediction,
 });
 
-export default connect(mapStateToProps, { getAllPredictions })(Report);
+export default connect(mapStateToProps, { clearPrediction, getAllPredictions })(
+  Report
+);

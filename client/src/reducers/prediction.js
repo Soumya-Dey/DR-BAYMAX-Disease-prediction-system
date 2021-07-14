@@ -2,6 +2,7 @@ import {
   GET_PREDICTION,
   GET_ALL_PREDICTIONS,
   PREDICTION_ERROR,
+  CLEAR_PREDICTION,
 } from '../actions/types';
 
 const initialState = {
@@ -28,6 +29,12 @@ export default function (state = initialState, action) {
         predictions: action.payload,
       };
     // fail when making a prediction
+    case CLEAR_PREDICTION:
+      return {
+        ...state,
+        loading: false,
+        prediction: null,
+      };
     case PREDICTION_ERROR:
       return {
         ...state,

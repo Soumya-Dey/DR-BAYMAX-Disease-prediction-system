@@ -5,16 +5,14 @@ import { Select } from 'antd';
 import symptomObj from '../../utils/symptomObject';
 const { Option } = Select;
 
-/*const children = [];
-for (let i = 10; i < 36; i++) {
+const children = [];
+for (let item in symptomObj) {
   children.push(
-    <Option style={{ padding: '14px !important' }} key={i.toString(36) + i}>
-      hello
+    <Option style={{ padding: '14px !important' }} key={item}>
+      {symptomObj[item]}
     </Option>
   );
-}*/
-
-const options = [...symptomObj];
+}
 
 const AntSelect = ({ symptoms, setSymptoms }) => {
   const onChange = (value) => {
@@ -30,9 +28,8 @@ const AntSelect = ({ symptoms, setSymptoms }) => {
       placeholder='Please select your symptoms...'
       value={symptoms}
       onChange={onChange}
-      options={options}
     >
-      {/* {children} */}
+      {children}
     </Select>
   );
 };

@@ -1,17 +1,27 @@
 import axios from 'axios';
 
 import { setAlert } from './alert';
-import { GET_PREDICTION, GET_ALL_PREDICTIONS, PREDICTION_ERROR } from './types';
+import {
+  GET_PREDICTION,
+  GET_ALL_PREDICTIONS,
+  PREDICTION_ERROR,
+  CLEAR_PREDICTION,
+} from './types';
 
 //for making a prediction
-export const getPrediction = (symptoms) => async(dispatch) => {
-  try{
-    if(symptoms.length < 3) dispatch(setAlert("Please choose at least 3 symptoms", "danger"))
-    const res = await axios.post('/predict', JSON.stringify({symptoms}), {headers:{"Content-Type":"application/json"}});
-    dispatch({
-      type: GET_PREDICTION,
-      payload: res.data,
-    });
+export const getPrediction = (symptoms) => async (dispatch) => {
+  try {
+    if (symptoms.length < 3)
+      dispatch(setAlert('Please choose at least 3 symptoms', 'danger'));
+    else {
+      const res = await axios.post('/predict', JSON.stringify({ symptoms }), {
+        headers: { 'Content-Type': 'application/json' },
+      });
+      dispatch({
+        type: GET_PREDICTION,
+        payload: res.data,
+      });
+    }
   } catch (error) {
     // validation errors
     const errArr = error.response.data.errors;
@@ -29,9 +39,7 @@ export const getPrediction = (symptoms) => async(dispatch) => {
       },
     });
   }
-}
-
-
+};
 
 // for getting all the predictions made by an user
 export const getAllPredictions = () => async (dispatch) => {
@@ -59,4 +67,10 @@ export const getAllPredictions = () => async (dispatch) => {
       },
     });
   }
+};
+
+export const clearPrediction = () => (dispatch) => {
+  dispatch({
+    type: CLEAR_PREDICTION,
+  });
 };
