@@ -2,17 +2,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import 'antd/dist/antd.css';
 import { Select } from 'antd';
-
+import symptomObj from '../../utils/symptomObject';
 const { Option } = Select;
 
-const children = [];
+/*const children = [];
 for (let i = 10; i < 36; i++) {
   children.push(
     <Option style={{ padding: '14px !important' }} key={i.toString(36) + i}>
       hello
     </Option>
   );
-}
+}*/
+
+const options = [...symptomObj];
 
 const AntSelect = ({ symptoms, setSymptoms }) => {
   const onChange = (value) => {
@@ -28,8 +30,9 @@ const AntSelect = ({ symptoms, setSymptoms }) => {
       placeholder='Please select your symptoms...'
       value={symptoms}
       onChange={onChange}
+      options={options}
     >
-      {children}
+      {/* {children} */}
     </Select>
   );
 };
