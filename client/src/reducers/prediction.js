@@ -3,6 +3,7 @@ import {
   GET_ALL_PREDICTIONS,
   PREDICTION_ERROR,
   CLEAR_PREDICTION,
+  START_LOADING,
 } from '../actions/types';
 
 const initialState = {
@@ -41,6 +42,11 @@ export default function (state = initialState, action) {
         loading: false,
         prediction: null,
         error: action.payload,
+      };
+    case START_LOADING:
+      return {
+        ...state,
+        loading: true,
       };
     default:
       return state;

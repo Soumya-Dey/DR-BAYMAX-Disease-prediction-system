@@ -699,6 +699,39 @@ button {
   margin-right: 0.6rem;
 }
 
+.report-div {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  /* grid-template-columns: 1fr 1fr;*/
+  gap: 28px;
+}
+
+.report-item {
+  width: 48%;
+  background-color: var(--light-color);
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 24px 32px;
+}
+
+.top-div {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ant-pagination {
+  margin: 2rem 0 4rem 0 !important;
+}
+
+.report-item .lead span {
+  font-weight: 600;
+}
+
+.report-item .symp-chosen p {
+  margin-bottom: 0 !important;
+}
+
 /* Landing Page */
 .landing {
   position: relative;

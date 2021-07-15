@@ -43,7 +43,7 @@ const DashboardTopBar = ({ user, logout }) => {
 
       <div className='actions-container'>
         <Link to='/dashboard' className='medium text-dark' title='Dashboard'>
-          <i class='fas fa-home mr-15'></i>
+          <i className='fas fa-home mr-15'></i>
         </Link>
         <Link
           to='/report'

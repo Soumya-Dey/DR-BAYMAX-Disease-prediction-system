@@ -44,7 +44,7 @@ const Result = ({
               target='_blank'
               href={`https://www.google.com/search?q=${prediction.prediction.disease.toLowerCase()}`}
             >
-              <i class='fas fa-external-link-alt ext-link'></i>
+              <i className='fas fa-external-link-alt ext-link'></i>
             </a>
           </div>
           <p className='pred-desc mb-2'>

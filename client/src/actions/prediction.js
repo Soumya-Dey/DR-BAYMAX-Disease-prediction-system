@@ -6,6 +6,7 @@ import {
   GET_ALL_PREDICTIONS,
   PREDICTION_ERROR,
   CLEAR_PREDICTION,
+  START_LOADING,
 } from './types';
 
 //for making a prediction
@@ -44,6 +45,9 @@ export const getPrediction = (symptoms) => async (dispatch) => {
 // for getting all the predictions made by an user
 export const getAllPredictions = () => async (dispatch) => {
   try {
+    dispatch({
+      type: START_LOADING,
+    });
     const res = await axios.get('/report');
 
     dispatch({
