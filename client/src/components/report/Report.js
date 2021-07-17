@@ -22,7 +22,7 @@ const Report = ({
 
   return (
     <div className='dashboard'>
-      {loading ? (
+      {loading || predictions === null ? (
         <Spinner />
       ) : predictions.count > 0 ? (
         <Fragment className='mb-4'>
