@@ -10,6 +10,7 @@ const initialState = {
   loading: true,
   prediction: null,
   predictions: null,
+  newPrediction: true,
   error: {},
 };
 
@@ -20,6 +21,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
+        newPrediction: true,
         prediction: action.payload,
       };
     // getting all the prediction of the user
@@ -27,6 +29,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
+        newPrediction: false,
         predictions: action.payload,
       };
     // fail when making a prediction
@@ -34,12 +37,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
+        newPrediction: false,
         prediction: null,
       };
     case PREDICTION_ERROR:
       return {
         ...state,
         loading: false,
+        newPrediction: false,
         prediction: null,
         error: action.payload,
       };

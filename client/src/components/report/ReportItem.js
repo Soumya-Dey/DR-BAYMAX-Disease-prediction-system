@@ -34,9 +34,7 @@ const ReportItem = ({ report }) => {
       </p>
       <div className='symp-chosen'>
         {report.symptoms.map((symp, i) => (
-          <p className='mr-05' key={i}>
-            {symptomObj[symp]}
-          </p>
+          <p key={i}>{symptomObj[symp]}</p>
         ))}
       </div>
     </div>

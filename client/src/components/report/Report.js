@@ -11,11 +11,11 @@ import { getAllPredictions, clearPrediction } from '../../actions/prediction';
 const Report = ({
   clearPrediction,
   getAllPredictions,
-  prediction: { loading, predictions },
+  prediction: { loading, predictions, newPrediction },
 }) => {
   useEffect(() => {
     clearPrediction();
-    getAllPredictions();
+    if (newPrediction) getAllPredictions();
   }, [clearPrediction, getAllPredictions]);
 
   const [page, setPage] = useState(1);
@@ -43,7 +43,12 @@ const Report = ({
           <AntPagination count={predictions.count || 0} setPage={setPage} />
         </Fragment>
       ) : (
-        'No Previous Report found...'
+        <Fragment>
+          <Link to='/dashboard' className='btn btn-light mb-2'>
+            Go Back
+          </Link>
+          <p className='no-report'>No Previous Report found...</p>
+        </Fragment>
       )}
     </div>
   );

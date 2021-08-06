@@ -13,8 +13,9 @@ const AntPagination = ({ count, setPage }) => {
     <Pagination
       defaultCurrent={1}
       defaultPageSize={4}
-      total={count}
+      showSizeChanger={false}
       showQuickJumper={true}
+      total={count}
       onChange={onPageChange}
     />
   );

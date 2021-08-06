@@ -117,6 +117,8 @@ img {
 
 .symp-chosen {
   display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
 }
 
 .symp-chosen p {
@@ -125,7 +127,17 @@ img {
   padding: 1px 8px;
   color: var(--dark-color);
   font-weight: 500;
+  font-size: 0.9em;
   border-radius: 4px;
+}
+
+.no-report {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.4em;
+  font-weight: 500;
 }
 
 .prediction {
