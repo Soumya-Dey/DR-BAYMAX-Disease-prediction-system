@@ -37,7 +37,6 @@ export default function (state = initialState, action) {
       return {
         ...state,
         loading: false,
-        newPrediction: false,
         prediction: null,
       };
     case PREDICTION_ERROR:

@@ -1,6 +1,6 @@
 import React, { useEffect, Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Spinner from '../layouts/Spinner';
@@ -16,7 +16,7 @@ const Report = ({
   useEffect(() => {
     clearPrediction();
     if (newPrediction) getAllPredictions();
-  }, [clearPrediction, getAllPredictions]);
+  }, [clearPrediction, getAllPredictions, newPrediction]);
 
   const [page, setPage] = useState(1);
 

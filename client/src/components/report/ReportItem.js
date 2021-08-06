@@ -1,14 +1,18 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import symptomObj from '../../utils/symptomObject';
 
 const ReportItem = ({ report }) => {
+  const convertUTCToLocal = (date) => {
+    date.setMinutes(date.getMinutes() - date.getTimezoneOffset());
+    return date;
+  };
+
   return (
     <div className='report-item'>
       <div className='top-div'>
         <p className='x-small'>
-          {new Date(report.created).toLocaleString('en-US', {
+          {convertUTCToLocal(new Date(report.created)).toLocaleString('en-In', {
             weekday: 'long',
             year: 'numeric',
             month: 'long',
@@ -20,6 +24,7 @@ const ReportItem = ({ report }) => {
           className='x-small'
           title='Search on Google'
           target='_blank'
+          rel='noreferrer'
           href={`https://www.google.com/search?q=${report.disease.toLowerCase()}`}
         >
           <i class='fas fa-external-link-alt ext-link'></i>
@@ -40,7 +45,5 @@ const ReportItem = ({ report }) => {
     </div>
   );
 };
-
-ReportItem.propTypes = {};
 
 export default ReportItem;

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Pagination } from 'antd';
 import 'antd/dist/antd.css';
 
@@ -20,7 +19,5 @@ const AntPagination = ({ count, setPage }) => {
     />
   );
 };
-
-AntPagination.propTypes = {};
 
 export default AntPagination;

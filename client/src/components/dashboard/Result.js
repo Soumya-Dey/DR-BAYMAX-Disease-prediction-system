@@ -42,6 +42,7 @@ const Result = ({
               className='small'
               title='Search on Google'
               target='_blank'
+              rel='noreferrer'
               href={`https://www.google.com/search?q=${prediction.prediction.disease.toLowerCase()}`}
             >
               <i className='fas fa-external-link-alt ext-link'></i>
@@ -56,6 +57,7 @@ const Result = ({
               className='x-small'
               title='Search on Google'
               target='_blank'
+              rel='noreferrer'
               href={`https://www.google.com/search?q=${prediction.prediction.disease.toLowerCase()}`}
             >
               Know more

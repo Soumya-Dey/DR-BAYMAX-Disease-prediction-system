@@ -12,7 +12,7 @@ const DashboardTopBar = ({ user, logout }) => {
       <div className='info-container'>
         <p className='lead m-0'>Hello, {user.name.split(' ')[0]}</p>
         <p className='x-small'>
-          {new Date().toLocaleDateString('en-Us', {
+          {new Date().toLocaleDateString('en-In', {
             weekday: 'short',
             year: 'numeric',
             month: 'short',
